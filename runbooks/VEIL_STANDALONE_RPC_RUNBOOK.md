@@ -18,7 +18,7 @@ If you want this under VEIL website DNS (`rpc.veil.markets`), add this CNAME in 
 
 ## Scope
 
-- Runtime source node: `C:\Users\Josh\hypersdk\examples\veilvm` (`docker-compose.local.yml`)
+- Runtime source node: `<local-dev-path>` (`docker-compose.local.yml`)
 - Local RPC: `http://127.0.0.1:9660`
 - Tunnel transport: `cloudflared` (no deprecated VEIL2 surfaces)
 
@@ -41,7 +41,7 @@ Expected: `200`
 Important: VEIL node allows specific HTTP host headers by default. Keep `--http-host-header 127.0.0.1` so origin requests are accepted.
 
 ```powershell
-$logDir = "C:\Users\Josh\hypersdk\examples\veilvm\.runtime\standalone-rpc"
+$logDir = "<local-dev-path>"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 
 cloudflared tunnel `
@@ -79,7 +79,7 @@ This closes the cloud-side VEIL probe dependency in `M4_ANIMA_VALIDATE_VEIL`.
 ## 5) Shutdown and rotate
 
 ```powershell
-$pidFile = "C:\Users\Josh\hypersdk\examples\veilvm\.runtime\standalone-rpc\cloudflared.pid"
+$pidFile = "<local-dev-path>"
 if (Test-Path $pidFile) {
   $pid = Get-Content $pidFile -Raw
   Stop-Process -Id ([int]$pid) -Force
@@ -93,3 +93,4 @@ After shutdown, do not reuse stale tunnel URLs.
 - Current local compose binds RPC on loopback only (`127.0.0.1:9660:9650`), which is correct for host hardening.
 - Tunneling is preferred over opening host firewall inbound rules.
 - If you need a persistent hostname (`rpc.veil.markets`), use a named Cloudflare tunnel and DNS route, but keep origin host header handling equivalent.
+

@@ -6,7 +6,7 @@ This runbook covers production execution of VeilVM threshold-keying ceremony for
 
 Repository scope:
 
-- `C:\Users\Josh\hypersdk\examples\veilvm`
+- `<local-dev-path>`
 
 This runbook is Docker-first to avoid local CGO/build issues (`DataDog/zstd`, `blst`) on operator machines.
 
@@ -42,12 +42,12 @@ Optional promotion:
 Run on each validator operator host.
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm
+Set-Location <local-dev-path>
 
 $nodeID = "NodeID-REPLACE_ME"
 $outDir = ".\evidence-bundles\key-ceremony\node-keys\$nodeID"
 
-$mount = "C:/Users/Josh/hypersdk/examples/veilvm:/work"
+$mount = "<local-dev-path>"
 docker run --rm `
   -v $mount `
   -w /work `
@@ -68,7 +68,7 @@ Expected files for each validator:
 Collect all validator `*.public.json` files into one directory and run:
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm
+Set-Location <local-dev-path>
 
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-production-key-ceremony.ps1 `
   -CommitteeNodeIDs "NodeID-A,NodeID-B,NodeID-C" `
@@ -87,7 +87,7 @@ Notes:
 Run on each validator host with local private env file:
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm
+Set-Location <local-dev-path>
 
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-threshold-node-env.ps1 `
   -NodeID "NodeID-A" `
@@ -113,7 +113,7 @@ The generated env file contains:
 4. Run rollout audit:
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm
+Set-Location <local-dev-path>
 
 node .\scripts\audit-threshold-keying-rollout.mjs `
   --manifest .\evidence-bundles\key-ceremony\latest\ceremony-manifest.json `
@@ -140,3 +140,4 @@ Archive all of:
 1. Never commit private key <REDACTED> (`*.private.env`) to git.
 2. Never centralize validator private threshold keys with ceremony lead.
 3. Never mark production privacy as complete without passing rollout evidence and marker verification across the full committee.
+

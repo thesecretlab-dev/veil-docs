@@ -7,7 +7,7 @@
 
 ### Completed
 - Updated ANIMA dashboard ANIMA-tab systems panel:
-  - `C:\Users\Josh\Desktop\anima-dashboard\ui\src\ui\views\anima-dashboard.ts`
+  - `<local-dev-path>`
   - Added `CONWAY BOX TERMINAL` card with embedded iframe viewport and external-open link.
   - Added Conway panel metadata (`sandboxId`, `terminalUrl`, `os`) and URL resolution helper:
     - query override: `conwayTerminalUrl`
@@ -15,12 +15,12 @@
     - fallback: built-in default URL
   - Added URL validation guard (`http/https` only) and storage-access fallback handling.
 - Documented dashboard behavior for operators:
-  - `C:\Users\Josh\Desktop\anima-dashboard\docs\architecture.md`
+  - `<local-dev-path>`
   - Added `Conway Terminal Viewport` section with target sandbox, URL, OS label, and override precedence.
 
 ### Validation
 - UI tests executed in ANIMA dashboard repo:
-  - `cmd /c pnpm --dir "C:\Users\Josh\Desktop\anima-dashboard\ui" test`
+  - `cmd /c pnpm --dir "<local-dev-path>" test`
   - Existing unrelated failures remain in navigation/i18n/browser suites; no new failure was introduced in `anima-dashboard.ts` path.
 
 ### Current State
@@ -34,20 +34,20 @@
 
 ### Completed
 - Updated ANIMA MVP command RPC handling:
-  - `C:\Users\Josh\Desktop\veil-automaton\src\mvp\build-games-mvp.ts`
+  - `<local-dev-path>`
   - `--anima-rpc-url` now accepts VEIL native API paths (`/veilapi`) in addition to EVM RPC paths.
   - chain-id detection now falls back to `veilvm.genesis` when `eth_chainId` is unavailable on native VEIL endpoints.
 - Updated VM SDK runtime compatibility for native VEIL API:
-  - `C:\Users\Josh\Desktop\veil-automaton\sdks\veil-vm\src\client.ts`
+  - `<local-dev-path>`
   - added `/veilapi` fallback handling for `ping`, `getChainId`, and `getBlockNumber` (height from `/ext/health`).
   - guarded unsupported legacy method calls (`agent_get`, `market_list`, `events_query`) so startup probes fail only on real connectivity errors.
 - Executed continuity MVP run against live standalone endpoint and canonical chain API:
   - ANIMA runtime probe now starts/stops live (`Agent ... online`, `Agent stopped`).
   - result: `continuity-pass`
-  - artifact: `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-24T00-19-20-144Z.json`
+  - artifact: `<local-dev-path>`
 - Executed strict fresh-provision attempt (non-simulated):
   - result: fail at Conway control-plane billing gate (`INSUFFICIENT_CREDITS`)
-  - artifact: `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-24T00-19-32-914Z.json`
+  - artifact: `<local-dev-path>`
 
 ### Current State
 - ANIMA-to-VEIL connectivity is real on the live standalone VEIL endpoint when using canonical `/veilapi`.
@@ -60,29 +60,29 @@
 
 ### Completed
 - Updated automaton runner truth model:
-  - `C:\Users\Josh\Desktop\veil-automaton\src\mvp\build-games-mvp.ts`
+  - `<local-dev-path>`
   - added `--provision-mode auto|fresh|reuse`.
   - run/tracker payloads now include `strictPassed`, `continuityPassed`, `provisionedFresh`, and explicit `outcome`.
   - strict completion now requires fresh provisioning; sandbox reuse only qualifies as continuity.
 - Updated frontend status surfaces:
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\app\api\mvp-run\route.ts`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\app\api\portal-status\route.ts`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\app\app\launch\page.tsx`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
   - launch page now defaults to strict run mode and renders strict/continuity badges.
 - Reclassified latest run artifacts to continuity (no false strict pass):
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\public\maiev\mvp-run-latest.json`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\docs\claude-handshake\build-games-2026-mvp-tracker.json`
-  - `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-23T22-42-04-396Z.json`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
 
 ### Validation
-- `pnpm.cmd exec tsc --noEmit` passed in `C:\Users\Josh\Desktop\veil-automaton`.
+- `pnpm.cmd exec tsc --noEmit` passed in `<local-dev-path>`.
 - Frontend repo still has existing unrelated TypeScript debt; MVP files were patched without broad repo rollback or mass edits.
 - Strict mode run (`--provision-mode fresh`) reached real Conway control-plane and failed with billing proof:
   - `INSUFFICIENT_CREDITS` (`required_cents=800`, `current_balance_cents=0`)
-  - artifact: `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-23T23-57-56-646Z.json`
+  - artifact: `<local-dev-path>`
 - Continuity mode run (`--provision-mode reuse --control-sandbox-id d2fe48a2a6465322e963a0a11c30ead3`) passed under SLA:
   - outcome: `continuity-pass`
-  - artifact: `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-23T23-58-14-326Z.json`
+  - artifact: `<local-dev-path>`
 
 ### Current State
 - MVP board no longer treats continuity runs as strict completion.
@@ -95,7 +95,7 @@
 
 ### Completed
 - Removed alpha-gate middleware from frontend source:
-  - deleted `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\middleware.ts`
+  - deleted `<local-dev-path>`
 - Deployed updated frontend to production:
   - inspect: `https://vercel.com/0x12371cs-projects/veil/GgkPkUhyMptVyzQeREavN6VXUsKy`
   - production alias: `https://veil.markets`
@@ -113,10 +113,10 @@
 
 ### Completed
 - Updated live transparency journal content in frontend source:
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\app\app\transparency\page.tsx`
+  - `<local-dev-path>`
   - added 2026-02-23 entries for child connectivity blocker closure and `Live Transparency Push Verified`.
 - Updated handshake-facing frontend status brief:
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\docs\claude-handshake\frontend-status-brief.md`
+  - `<local-dev-path>`
 - Fixed production deploy blockers in frontend project so deploy could complete:
   - added missing deps used by existing gov surfaces (`viem`, `wagmi`, `@tanstack/react-query`)
   - made `/app/gov/new` wallet components client-only via dynamic imports (`ssr:false`) to prevent prerender wagmi-provider failure.
@@ -210,9 +210,9 @@
 - Resume Build Games MVP execution with reliable artifact/tracker state and no dependency on creating a brand-new Conway sandbox when credits are temporarily zero.
 
 ### Completed
-- Hardened MVP artifact serialization in `C:\Users\Josh\Desktop\veil-automaton\src\mvp\build-games-mvp.ts`:
+- Hardened MVP artifact serialization in `<local-dev-path>`:
   - `M5_ARTIFACT` now records as `passed` in the emitted run JSON (no stale `pending` in success runs).
-- Hardened tracker mapping in `C:\Users\Josh\Desktop\veil-automaton\src\mvp\build-games-mvp.ts`:
+- Hardened tracker mapping in `<local-dev-path>`:
   - tracker updates now map `M5_ARTIFACT` -> `M5_SURFACE_STATUS`.
   - `M5_SURFACE_STATUS.evidence` is now auto-populated with `mvp_run_json_path`, `ui_status_rendered`, and `source_artifact`.
 - Added no-new-credits fallback in MVP flow:
@@ -221,9 +221,9 @@
   - command used `--control-sandbox-id d2fe48a2a6465322e963a0a11c30ead3`
   - result: `PASS`, duration `23834ms`, under 20-minute SLA.
 - Updated canonical artifacts/surfaces:
-  - `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-23T22-42-04-396Z.json`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\public\maiev\mvp-run-latest.json`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\docs\claude-handshake\build-games-2026-mvp-tracker.json`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
 - Added child-validator launch preflight state to bootstrap tracker:
   - `evidence-bundles/child-node-bootstrap/child-node-bootstrap-tracker.json`
   - confirmed blockers: `avalanchego` missing in PATH, no local cluster initialized, and missing full validator registration params.
@@ -241,7 +241,7 @@
 - Remove ANIMA runtime simulation paths and align startup capital requirements with validator stake so launch posture stays fail-closed.
 
 ### Completed
-- Updated ANIMA runtime startup gate in `C:\Users\Josh\Desktop\veil-automaton\anima-runtime\pkg\agent\runtime.go`:
+- Updated ANIMA runtime startup gate in `<local-dev-path>`:
   - `newborn` now requires initial `VEIL >= validatorStakeVEIL` before transition out of newborn.
   - initial VAI funding remains required for settlement before entering trading.
 - Removed simulated milestone progression in ANIMA runtime:
@@ -249,11 +249,11 @@
   - validating no longer auto-sets `ValidatorActive`.
   - both paths now explicitly fail closed when live integrations are missing.
 - Updated ANIMA SDK docs:
-  - `C:\Users\Josh\Desktop\veil-automaton\sdks\anima\README.md` now reflects fail-closed provisioning/validating behavior and startup capital requirements.
+  - `<local-dev-path>` now reflects fail-closed provisioning/validating behavior and startup capital requirements.
 - Updated launch-gate criteria for ANIMA readiness:
   - `VEIL_PRODUCTION_LAUNCH_CHECKLIST.md` `G12` acceptance criteria now explicitly disallow simulated infra/validator milestone completion.
 - Recorded ANIMA-side live log update:
-  - `C:\Users\Josh\Desktop\veil-automaton\docs\live-dev-log.md`
+  - `<local-dev-path>`
 
 ### Current State
 - ANIMA runtime no longer presents simulated milestone completion as progress.
@@ -303,10 +303,10 @@
   - sandbox: `d2fe48a2a6465322e963a0a11c30ead3`
   - payment tx: `0xb860b0...b86c`
 - Artifacts:
-  - `C:\Users\Josh\Desktop\veil-automaton\docs\build-games-mvp-runs\run-2026-02-23T21-09-47-550Z.json`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\public\maiev\mvp-run-2026-02-23T21-09-47-550Z.json`
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\public\maiev\mvp-run-latest.json`
-  - tracker updated: `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\docs\claude-handshake\build-games-2026-mvp-tracker.json`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
+  - `<local-dev-path>`
+  - tracker updated: `<local-dev-path>`
 
 ### Current State
 - Standalone RPC path is operational for cloud validation.
@@ -319,7 +319,7 @@
 
 ### Completed
 - Extended Cloudflare tunnel ingress config on this machine:
-  - file: `C:\Users\Josh\.cloudflared\config.yml`
+  - file: `<local-dev-path>`
   - RPC routes now target `http://127.0.0.1:9660` with `httpHostHeader=127.0.0.1`
 - Created and validated a live public RPC hostname in active tunnel-owned DNS:
   - `veil-rpc.thesecretlab.app` -> tunnel `a15d2868-ffa5-456f-8109-c7c0baa584d0`
@@ -349,7 +349,7 @@
 - Linked runbook in primary docs index:
   - `README.md` (`Key Launch Docs`)
 - Added MVP handshake requirement note for remote VEIL RPC wiring:
-  - `C:\Users\Josh\Desktop\private-github-ready-20260219\veil-frontend\docs\claude-handshake\build-games-2026-mvp.md`
+  - `<local-dev-path>`
 
 ### Current State
 - Documentation for standalone RPC bring-up is now in place and canonical.
@@ -367,9 +367,9 @@
   - missing target confirmed: `0xB9a05A...96af`
 - Generated a new hardened-owner replacement key bundle with strict file ACLs:
   - active address: `0x641597...407B`
-  - active key file: `C:\Users\Josh\.veil-secrets\owner\active-owner.pk`
-  - archive key file: `C:\Users\Josh\.veil-secrets\owner\archive\hardened-owner-20260223T031629Z.pk`
-  - index file: `C:\Users\Josh\.veil-secrets\owner\KEY_INDEX.json`
+  - active key file: `<local-dev-path>`
+  - archive key file: `<local-dev-path>`
+  - index file: `<local-dev-path>`
   - ACL: `SYSTEM:(R)`, `Josh:(R,W)` only on private key <REDACTED>
 - Built organized signer map (known key files only) with local/runtime + AVAX C-Chain balances:
   - `evidence-bundles/key-map-20260223.json`
@@ -386,13 +386,13 @@
 
 ### Completed
 - Restored companion runtime services required by launch checks:
-  - restarted `avago-veil2`, `avago-veil2b`, `sigagg`, `sigagg-proxy` in `C:\Users\Josh\avalanche-l1-docker`
+  - restarted `avago-veil2`, `avago-veil2b`, `sigagg`, `sigagg-proxy` in `<local-dev-path>`
   - confirmed companion RPC back online at `http://127.0.0.1:9650/ext/bc/2L5JWLhXnDm8dPyBFMjBuqsbPSytL4bfbGJJj37jk5ri1KdXhd/rpc`
   - verified `eth_chainId=0x56bf` (`22207`)
 - Re-ran launch gate stack:
   - `node scripts/prelaunch-readiness.mjs` -> `overallPass=true`
   - initial `node scripts/run-critical-phase-gates.mjs` run failed only on strict packet signatures (`LH11_PACKET_SIGNATURES`)
-  - loaded launch signer env from `C:\Users\Josh\.veil-secrets\launch\active.env` and reran -> pass
+  - loaded launch signer env from `<local-dev-path>` and reran -> pass
 - Executed strict wrapper to keep signer policy deterministic:
   - `powershell -ExecutionPolicy Bypass -File scripts/run-critical-phase-strict.ps1`
   - new run: `evidence-bundles/critical-phase/critical-phase-20260223-031247/critical-phase-summary.json`
@@ -796,7 +796,7 @@
 
 ### Completed
 - Located and validated funded relayer key path:
-  - `C:\Users\Josh\avalanche-l1-docker\data\avalanche-cli\key\cli-awm-relayer.pk`
+  - `<local-dev-path>`
   - signer/address: `0x7deFD0...Ad53`
 - Ran mainnet surface check with relayer loaded:
   - `npm run bridge:check-mainnet-live`
@@ -948,9 +948,9 @@
 
 ### Completed
 - Created operator handoff with strict do/do-not rules:
-  - `C:\Users\Josh\Desktop\VEIL_HANDOFF_2026-02-24_MAINNET_RECOVERY.md`
+  - `<local-dev-path>`
 - Updated latest handoff pointer:
-  - `C:\Users\Josh\Desktop\VEIL_HANDOFF_LATEST.txt`
+  - `<local-dev-path>`
 - Verified live runtime state at handoff time:
   - VEILVM local readiness endpoint returned `200` (`http://127.0.0.1:9660/ext/health/readiness`).
   - Companion EVM mainnet is **not live**.
@@ -1072,9 +1072,9 @@
 ### Completed
 - Corrected signature aggregator wiring for recovery flow:
   - `sigagg` requests must target `/aggregate-signatures` (root `/` returns proxy `OK` and is not a signing endpoint).
-  - updated `C:\Users\Josh\avalanche-l1-docker\data\avalanche-cli\runs\Mainnet\signature-aggregator\config.json` to mainnet RPC (`https://api.avax.network`) for `info-api` and `p-chain-api`.
+  - updated `<local-dev-path>` to mainnet RPC (`https://api.avax.network`) for `info-api` and `p-chain-api`.
 - Fixed and executed one-off validator-set initializer in Dockerized Go toolchain:
-  - script: `C:\Users\Josh\_tmp_avalanche_tooling_sdk\scripts\init_veilpos_validatorset.go`
+  - script: `<local-dev-path>`
   - tx: `0xde9da0...ec23`
   - receipt: `status=1`
 - Registered companion node A as an L1 validator on `VEILPOS`:
@@ -1083,7 +1083,7 @@
   - validation ID: `Ty6pYrGkvC4jFRD2urZQFg6t6GzdRDSRn3EEBrDuH49cQpBZj`
   - register tx: `x4SKrBk41wyLsFv6g3t3g1uyWKvhhAzvGi7JzHH959cRKo2nT`
 - Patched companion compose to increase file-descriptor headroom:
-  - `C:\Users\Josh\avalanche-l1-docker\docker-compose.yml`
+  - `<local-dev-path>`
   - added `ulimits.nofile=262144` and `--fd-limit=262144` for companion node A/B.
 - Refreshed dual-chain readiness evidence:
   - `evidence-bundles/dualchain-readiness/dualchain-20260225-041722/readiness.json`
@@ -1130,7 +1130,7 @@
   - `avalanche blockchain addValidator VEILPOS ...` for node B at `weight=20` and `weight=1` both failed with `insufficient funds for transfer`.
   - `avalanche blockchain removeValidator VEILPOS ...` without `--force` failed on uptime fetch (`503`), and force-removal remains blocked by signature threshold.
 - Added one-off DisableL1Validator probe script:
-  - `C:\Users\Josh\_tmp_avalanche_tooling_sdk\scripts\disable_l1_validator.go`
+  - `<local-dev-path>`
   - current mainnet wallet builder path returns `failed to fetch owner ... not found` for both known VEILPOS validation IDs.
 - Regenerated dual-chain readiness evidence:
   - `evidence-bundles/dualchain-readiness/dualchain-20260225-043410/readiness.json`
@@ -1294,3 +1294,4 @@
   - restore and run the original `NodeID-D26...` validator identity (staker cert/key + signer key), or
   - inject substantial additional stake to connected validators (approximately `399 AVAX`) to satisfy connected-stake threshold, or
   - redeploy/migrate to a new validator set with sane initial weighting.
+

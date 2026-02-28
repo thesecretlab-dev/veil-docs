@@ -174,7 +174,7 @@ go run ./examples/veilvm/cmd/veilvm-keygen \
 Production recommendation (Docker-first; avoids local `zstd`/`blst` CGO issues):
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm
+Set-Location <local-dev-path>
 
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run-production-key-ceremony.ps1 `
   -CommitteeNodeIDs "NodeID-A,NodeID-B,NodeID-C" `
@@ -904,7 +904,7 @@ Reusable templates:
 PowerShell UUP quick-start:
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm\scripts
+Set-Location <local-dev-path>
 Copy-Item .\create-chain-on-subnet.uup.template.ps1 .\create-chain-on-subnet.uup.ps1
 notepad .\create-chain-on-subnet.uup.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\create-chain-on-subnet.uup.ps1
@@ -925,4 +925,5 @@ When dry-run output is healthy (`utxoCount > 0`), remove `--dry-run` to issue `C
 - `VEIL_WHITEPAPER_ALIGNMENT_MATRIX.md` - claim-by-claim whitepaper alignment checklist
 - `VEIL_HANDOFF_2026-02-19.md` - project-wide handoff snapshot and immediate next actions
 - `SAVEPOINT_2026-02-21_PRIVATE_LIQUIDITY.md` - current private-liquidity execution checkpoint
+
 

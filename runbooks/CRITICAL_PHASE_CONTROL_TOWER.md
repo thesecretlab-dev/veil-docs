@@ -21,7 +21,7 @@ From `examples/veilvm/scripts` command surfaces:
 
 ## 3. Exact Operator Sequence
 
-Run from `C:\Users\Josh\hypersdk\examples\veilvm\scripts`.
+Run from `<local-dev-path>`.
 
 0. Initialize or refresh local signer policy from latest strict packet evidence (writes required signer addresses and min-signature policy):
 
@@ -172,3 +172,4 @@ Unsigned bypass is enabled by either:
 
 This bypass marks signature policy as pass for rehearsal mechanics only.  
 Any packet with `launch-packet.json.allowUnsigned=true` is automatic **NO-GO** for critical-phase launch authorization.
+

@@ -108,7 +108,7 @@ Each run writes:
 Generate VEIL-branded HTML reports:
 
 ```powershell
-Set-Location C:\Users\Josh\hypersdk\examples\veilvm\scripts
+Set-Location <local-dev-path>
 npm run audit:evmbench:report
 ```
 
@@ -147,3 +147,4 @@ If findings remain unresolved and unsigned, launch state remains `NO-GO`.
 
 3. Known-good run evidence:
    - `evidence-bundles/audit-closure/evmbench-20260220-133630/job-status.json` (`succeeded`)
+

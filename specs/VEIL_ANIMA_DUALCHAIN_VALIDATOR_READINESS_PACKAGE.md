@@ -15,24 +15,24 @@ For validator onboarding and new deploy operations, VEILVM and companion EVM mus
 ## 2) Operator Workflow
 
 1. Start dual runtime in parallel:
-   - `powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\Josh\hypersdk\examples\veilvm\scripts\restart-wizard.ps1`
+   - `powershell -NoProfile -ExecutionPolicy Bypass -File <local-dev-path>`
 2. Run validator setup/update flow on VEILVM:
-   - `Set-Location C:\Users\Josh\hypersdk\examples\veilvm\scripts`
+   - `Set-Location <local-dev-path>`
    - `node setup-local.mjs`
 3. Re-run parallel runtime startup after validator changes:
-   - `powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\Josh\hypersdk\examples\veilvm\scripts\restart-wizard.ps1`
+   - `powershell -NoProfile -ExecutionPolicy Bypass -File <local-dev-path>`
 4. Generate the dual-chain readiness bundle:
-   - `Set-Location C:\Users\Josh\hypersdk\examples\veilvm\scripts`
+   - `Set-Location <local-dev-path>`
    - `npm run readiness:dualchain`
 5. Ensure validator stake manifest is maintained:
-   - `C:\Users\Josh\hypersdk\examples\veilvm\scripts\dualchain-validator-stake.manifest.json`
+   - `<local-dev-path>`
    - Every dual-chain validator must map to a VEILVM address with required `minVVEILRaw`.
 
 ### Auto-Finalize (hands-off while companion bootstraps)
 
 If companion bootstrap is still in progress, run:
 
-- `Set-Location C:\Users\Josh\hypersdk\examples\veilvm\scripts`
+- `Set-Location <local-dev-path>`
 - `npm.cmd run ops:auto-finalize`
 
 This command:
@@ -46,9 +46,9 @@ This command:
 
 The readiness generator writes:
 
-- `C:\Users\Josh\hypersdk\examples\veilvm\evidence-bundles\dualchain-readiness\<run-id>\readiness.json`
-- `C:\Users\Josh\hypersdk\examples\veilvm\evidence-bundles\dualchain-readiness\<run-id>\readiness.md`
-- `C:\Users\Josh\hypersdk\examples\veilvm\evidence-bundles\dualchain-readiness\latest.txt`
+- `<local-dev-path>`
+- `<local-dev-path>`
+- `<local-dev-path>`
 
 ## 4) Readiness Gates (Dual-Chain)
 
@@ -165,3 +165,4 @@ Latest evidence after local balance consolidation:
 
 - readiness bundle: `evidence-bundles/dualchain-readiness/dualchain-20260225-054055/readiness.md`
 - `veil-funded` C balance: `0.149812121294185682 AVAX` (still below the `1 AVAX` minimum stake for any new PoS registration).
+

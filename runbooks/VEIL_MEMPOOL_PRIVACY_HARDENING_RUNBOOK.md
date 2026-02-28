@@ -92,7 +92,7 @@ Document the mempool privacy hardening step that is now implemented, what it gua
 
 ## 5. Verification Procedure
 
-Run from repo root (`C:\Users\Josh\hypersdk`) unless noted.
+Run from repo root (`<local-dev-path>`) unless noted.
 
 1. Build and restart node with hardened compose profile:
 
@@ -216,3 +216,4 @@ Current local snapshot (`2026-02-22`, current VeilVM stack only):
   - forbidden fallback marker absent on both validators: `threshold-gated tx gossip decryption enabled (attestation mode)`
 - audit script note:
   - rollout audit now reads docker logs from container start time (or explicit `logSince`) to avoid startup marker false negatives from short tail windows
+
