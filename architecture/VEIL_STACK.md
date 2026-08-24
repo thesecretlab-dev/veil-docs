@@ -7,7 +7,7 @@ Authority: this file + `veilvm/consts/types.go`. Older READMEs, ANIMA docs, and 
 ## One protocol
 
 ```
-UX (veil-frontend)     Polymarket today. Native VeilVM later.
+UX (veil-frontend)     Polymarket catalog. Native VeilVM local only. Not Fuji.
         │
 ANIMA / ZER0ID / VEILdb     Agents, identity, off-chain state. They do not mint VEIL.
         │

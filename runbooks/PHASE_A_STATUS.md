@@ -22,7 +22,7 @@ Runlist: `VEIL_MAINNET_LAUNCH_RUNLIST.md`.
 | B01 | **PARTIAL** | Go 1.26.7, gcc 16.1 MinGW, Node v24.19.0, Foundry 1.7.1. Docker Desktop / WSL not installed. |
 | B02 | **FAIL** | `platform-cli` does not compile on Windows (`storage.AvailableBytes`). `avalanche-cli` source present, not built. |
 | B03 | **PASS** | New operator keys generated 2026-08-24. Public map: `veilvm/evidence-bundles/key-map/operator-2026-08-24.json`. Private hex in `C:\Users\Justin\tools\veil-keybox\private` (not git). |
-| B04 | TODO | Fund Fuji P/C for `pchain-operator` / `cchain-gas`. |
+| B04 | **PARTIAL** | Fuji C-gas `0xb954…0315` ~0.25 AVAX. P-operator `P-fuji1pmaraw…399` ~0.75 AVAX (C→P import `YBDRA7AB…`). Not a Phase E gate. |
 | B05 | **PASS** | Keybox outside git + ACL; `secrets/README.md` points at it. |
 
 **Stack tighten (2026-08-24):** [`architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md). v1 = 19 actions. Companion = rails only. Parked Solidity is not the protocol.
@@ -36,13 +36,13 @@ Skipped Docker. Built AvalancheGo + VeilVM plugin natively.
 | C01 | **PASS** (local Windows) | Node `:9660` healthy. Chain `bdRGUMA7rzZFXjbn1ePTjqhAUfTjW94e69p7qZd4puZ3uEosL` producing blocks. |
 | C02 | **PASS** | `enabled=true strict=true groth16_vk_set=true required_circuit_id=shielded-ledger-v1` via chain config (plugin does not inherit `VEIL_ZK_*` env). |
 | C03 | **PASS** (local Windows) | Native AMM smoke: mint VAI, add liquidity, swap. Order+liquidity dual-chain E2E PASS. |
-| C04 | **PASS** (local anvil, not dual AvalancheGo EVM) | Companion = anvil `:8545` chainId 31337. Relayer + order-router in-tree. |
+| C04 | **FAIL** (not a stack) | Anvil `:8545` is up. Rails are **not** persisted. Relayer is a one-shot e2e, not a standing seam. Do not treat as dual-chain ready. |
 | C05 | **PASS** | `evidence-bundles/abandoned-feb-2026/`. Live `companion-evm.addresses.json` is anvil 31337. `check-companion-primitives` rejects chainId 22207. |
 | C06 | **PASS** (local profile only) | `npm run check:prelaunch` `overallPass=true` `productionLaunchPass=false`. Artifact `control-tower/prelaunch-readiness-20260824184020.json`. |
 
 Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 
-**C exit (local Windows):** C01, C02, C03, C06 PASS. DC2 (dual AvalancheGo EVM) tracked into Phase D/F.
+**C exit:** C01–C03, C05, C06 local node PASS. **C04 FAIL — EVM rails not a stack. Fuji L1 is closed until NOW_TRIAGE N1–N3.**
 
 ## Phase D (2026-08-24)
 
@@ -56,9 +56,9 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 | D06 | **FAIL** | Encrypted gossip + threshold decrypt are **not in the v1 binary**. Shared-key-only would also FAIL. Do not claim mempool privacy. |
 | D07 | **PASS** | `veil-frontend/docs/privacy-scope-matrix.md` — VM commit opaque; companion events commitment/nullifier; Polymarket public catalog. |
 | D08 | **PASS** | Native vs Polymarket copy. No “live private markets.” Native cards = Local. CTA/veil/how-it-works aligned. |
-| D09 | TODO | Teleporter/bridge not on local anvil (Phase F). |
+| D09 | **FAIL** | Teleporter + `VeilBridgeMinter` are empty. Do not fake. Fuji companion only — after NOW_TRIAGE. |
 | D10 | **PASS** | Gateway events are commitment/nullifier/envelopeHash only. `evidence-bundles/opaque-intents-2026-08-24.md`. |
 
-**D exit:** D01–D05, D07, D08, D10 PASS. D06 FAIL (honest). D09 tracked to Phase F.
+**D exit:** D01–D05, D07, D08, D10 PASS. D06 FAIL (no gossip). D09 FAIL (no Teleporter). Protocol freeze is not a dual-chain freeze.
 
-Next: keep local UX solid. Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker for `platform-cli` / Fuji L1 (Phase E). Do not fund mainnet.
+**What we work on now:** [`NOW_TRIAGE.md`](NOW_TRIAGE.md) — persist rails, standing relayer, honest C04. **Not** Fuji L1.
