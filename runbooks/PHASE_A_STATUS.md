@@ -21,6 +21,8 @@ Runlist: `VEIL_MAINNET_LAUNCH_RUNLIST.md`.
 |---|---|---|
 | B01 | **PARTIAL** | Go 1.26.7, gcc 16.1 MinGW, Node v24.19.0, Foundry 1.7.1. Docker Desktop / WSL not installed. |
 | B02 | **FAIL** | `platform-cli` does not compile on Windows (`storage.AvailableBytes`). `avalanche-cli` source present, not built. |
-| B03–B05 | TODO | New operator keys, Fuji funds, secrets layout. |
+| B03 | **PASS** | New operator keys generated 2026-08-24. Public map: `veilvm/evidence-bundles/key-map/operator-2026-08-24.json`. Private hex in `C:\Users\Justin\tools\veil-keybox\private` (not git). |
+| B04 | TODO | Fund Fuji P/C for `pchain-operator` / `cchain-gas`. |
+| B05 | **PASS** | Keybox outside git + ACL; `secrets/README.md` points at it. |
 
-Next: either enable WSL/Docker (needs admin) **or** B03 new keys and keep local-runtime for Phase C after Docker.
+Next: B04 Fuji faucet (needs AVAX test funds) **or** WSL/Docker for Phase C. Do not fund mainnet yet.
