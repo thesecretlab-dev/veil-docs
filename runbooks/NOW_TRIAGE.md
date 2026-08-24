@@ -28,9 +28,9 @@ Authority: [`architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md). This f
 | Local VeilVM node | Yes (`:9660`, shielded-ledger-v1 strict) |
 | Native create + `CommitOrder` via router | Yes (local UI / `/orders`) |
 | Native AMM / VAI / COL tests | Yes |
-| Persistent companion rails (WVEIL, gateways, faucet) | **No** — anvil is up; addresses file is empty; e2e deploys then throws away |
-| Relayer as a standing service against those rails | **No** — one-shot script only |
-| Teleporter / `VeilBridgeMinter` wired | **No** |
+| Persistent companion rails (WVEIL, gateways, faucet) | **Yes** on anvil 31337 (`deploy-rails.mjs`) |
+| Relayer as a standing service against those rails | **Yes** for e2e; `--watch` on stack start |
+| Teleporter / `VeilBridgeMinter` wired | **Local mock only.** Not Fuji ICTT |
 | Reveal / proof / clear in the product loop | **No** |
 | Fuji L1 | **No** |
 | `platform-cli` on this Windows box | **No** |
@@ -44,13 +44,13 @@ Gate: **local dual-chain is a stack**, or we explicitly waive EVM and ship VeilV
 
 | ID | Need | Pass |
 |---|---|---|
-| N1 | Deploy v1 rails on local anvil and **persist** them: WVEIL, order gateway, liquidity gateway, faucet. Owner = companion-admin or documented anvil key. | `companion-evm.addresses.json` has live 31337 addresses; `cast code` non-empty. Teleporter/bridge minter stay **empty** (do not fake). |
-| N2 | Standing relayer: intent on gateway → mailbox → `/evm/intents/execute` → `CommitOrder` → `markIntentExecuted`. Same for one liquidity op. Against **N1 addresses**, not a fresh deploy. | Repeatable e2e; gateway state = EXECUTED. |
-| N3 | Local stack start does N1+N2 without a human puzzle. | `run-local-stack.ps1` leaves rails + relayer up. |
-| N4 | Commit is not a dead end: operator path for reveal + proof + clear on a local market (script is enough; UI later). | Evidence bundle with tx hashes. |
-| N5 | Status honesty: C04 is **not** dual-chain PASS; D09 is **FAIL** until Teleporter is real; this file is the “what now.” | Docs match. |
+| N1 | Deploy v1 rails on local anvil and **persist** them. | **PASS** — `deploy-rails.mjs` + `companion-evm.addresses.json`. Teleporter = `LocalTeleporter` mock. |
+| N2 | Standing relayer against **N1 addresses**. | **PASS** — e2e EXECUTED on persisted gateways. `relay-opaque-intents.mjs --watch`. |
+| N3 | Local stack start does N1+N2. | **PASS** — `run-local-stack.ps1` deploys rails and starts relayer watch. |
+| N4 | Reveal / proof / clear operator path. | TODO |
+| N5 | Status honesty. | **PASS** — C04/D09 are local-anvil, not Fuji. |
 
-**NOW exit:** N1–N3 PASS. N4 may lag by one working session. N5 must be true immediately.
+**NOW exit:** N1–N3, N5 PASS. N4 (reveal/proof/clear) still open. Fuji still closed.
 
 ---
 

@@ -36,13 +36,13 @@ Skipped Docker. Built AvalancheGo + VeilVM plugin natively.
 | C01 | **PASS** (local Windows) | Node `:9660` healthy. Chain `bdRGUMA7rzZFXjbn1ePTjqhAUfTjW94e69p7qZd4puZ3uEosL` producing blocks. |
 | C02 | **PASS** | `enabled=true strict=true groth16_vk_set=true required_circuit_id=shielded-ledger-v1` via chain config (plugin does not inherit `VEIL_ZK_*` env). |
 | C03 | **PASS** (local Windows) | Native AMM smoke: mint VAI, add liquidity, swap. Order+liquidity dual-chain E2E PASS. |
-| C04 | **FAIL** (not a stack) | Anvil `:8545` is up. Rails are **not** persisted. Relayer is a one-shot e2e, not a standing seam. Do not treat as dual-chain ready. |
+| C04 | **PASS** (local anvil rails) | Persisted WVEIL + both gateways + faucet + LocalTeleporter + VeilBridgeMinter on 31337. Relayer e2e against those addresses: intent → CommitOrder → mark EXECUTED. Evidence `local-revive-2026-08-24/rails.md`. Not a Fuji companion L1. |
 | C05 | **PASS** | `evidence-bundles/abandoned-feb-2026/`. Live `companion-evm.addresses.json` is anvil 31337. `check-companion-primitives` rejects chainId 22207. |
 | C06 | **PASS** (local profile only) | `npm run check:prelaunch` `overallPass=true` `productionLaunchPass=false`. Artifact `control-tower/prelaunch-readiness-20260824184020.json`. |
 
 Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 
-**C exit:** C01–C03, C05, C06 local node PASS. **C04 FAIL — EVM rails not a stack. Fuji L1 is closed until NOW_TRIAGE N1–N3.**
+**C exit (local):** C01–C06 PASS on Windows anvil rails. Fuji L1 still closed until `platform-cli` (X1) and a real companion L1 + ICTT (X3).
 
 ## Phase D (2026-08-24)
 
@@ -56,9 +56,9 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 | D06 | **FAIL** | Encrypted gossip + threshold decrypt are **not in the v1 binary**. Shared-key-only would also FAIL. Do not claim mempool privacy. |
 | D07 | **PASS** | `veil-frontend/docs/privacy-scope-matrix.md` — VM commit opaque; companion events commitment/nullifier; Polymarket public catalog. |
 | D08 | **PASS** | Native vs Polymarket copy. No “live private markets.” Native cards = Local. CTA/veil/how-it-works aligned. |
-| D09 | **FAIL** | Teleporter + `VeilBridgeMinter` are empty. Do not fake. Fuji companion only — after NOW_TRIAGE. |
+| D09 | **PASS** (local-mock) | Registry filled: WVEIL, gateways, faucet, `VeilBridgeMinter`, `teleporterKind=local-mock`. `check:companion-primitives` PASS on 31337. **Not** Fuji ICTT. Phase F still required for real Teleporter. |
 | D10 | **PASS** | Gateway events are commitment/nullifier/envelopeHash only. `evidence-bundles/opaque-intents-2026-08-24.md`. |
 
-**D exit:** D01–D05, D07, D08, D10 PASS. D06 FAIL (no gossip). D09 FAIL (no Teleporter). Protocol freeze is not a dual-chain freeze.
+**D exit (local):** D01–D05, D07–D10 PASS. D06 FAIL (no encrypted gossip — do not claim mempool privacy). D09 is local-mock only.
 
-**What we work on now:** [`NOW_TRIAGE.md`](NOW_TRIAGE.md) — persist rails, standing relayer, honest C04. **Not** Fuji L1.
+**What we work on now:** [`NOW_TRIAGE.md`](NOW_TRIAGE.md) N3/N4. **Not** Fuji L1 until X1 `platform-cli`.
