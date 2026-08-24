@@ -44,4 +44,13 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 
 **C exit (local Windows):** C01, C02, C03, C06 PASS. DC2 (dual AvalancheGo EVM) tracked into Phase D/F.
 
-Next: **Phase D** protocol freeze (D01 genesis buckets, D02 COL tests, D05 circuit pin). Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker still required for `platform-cli` and Fuji L1 (Phase E). Do not fund mainnet yet.
+## Phase D (2026-08-24)
+
+| ID | Status | Notes |
+|---|---|---|
+| D01 | **PASS** (bucket sum) | `scripts/genesis-launchpad.mjs` — circulating 49,549,950 + COL locked 900,000,000 + COL live 41,449,050 = 990,999,000. Keep3r 2% (19,819,980) is a reservation *from circulating*, not extra mint. Artifact `evidence-bundles/launchpad-freeze/launchpad-freeze-20260824184356.json`. |
+| D02 | **PASS** | `go test ./actions -run ReleaseCOL` — unauthorized / zero / drain-all / epoch-cap / too-early all fail closed. Locked unchanged after drain attempt. |
+| D03 | PARTIAL | Genesis fee router 70/20/10 encoded (`7000/2000/1000`). VM accounting test not added yet. |
+| D04–D10 | TODO | VAI/ZK/privacy/frontend/companion primitives. |
+
+Next: D03 VM fee-router test, D04 VAI risk, D05 pin `shielded-ledger-v1`. Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker still required for `platform-cli` and Fuji L1 (Phase E). Do not fund mainnet yet.
