@@ -50,7 +50,9 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 |---|---|---|
 | D01 | **PASS** (bucket sum) | circulating 49,549,950 + COL locked 900,000,000 + COL live 41,449,050 = 990,999,000. **Keep3r dropped** (0 bips, not a bucket). Artifact `evidence-bundles/launchpad-freeze/latest.txt`. |
 | D02 | **PASS** | `go test ./actions -run ReleaseCOL` — unauthorized / zero / drain-all / epoch-cap / too-early all fail closed. Locked unchanged after drain attempt. |
-| D03 | PARTIAL | Genesis fee router 70/20/10 encoded (`7000/2000/1000`). VM accounting test not added yet. |
-| D04–D10 | TODO | VAI/ZK/privacy/frontend/companion primitives. |
+| D03 | **PASS** | RouteFees 70/20/10 (`7000/2000/1000`) + remainder-to-ops. `PutFeeRouterConfig` rejects non-10000 bips. Genesis JSON freeze test. |
+| D04 | **PASS** | VAI debt ceiling, epoch mint throttle + reset, backing floor, unauthorized mint. wsVEIL LTV must be 0 (`PutRiskConfig` / `SetRiskParams`). |
+| D05 | **PASS** | `shielded-ledger-v1` Groth16 VK sha256 `40d25f181550c879f93d22dfa50305700bdb0e731ced46d1b789248e552398ba`. Sample proof verifies against pinned VK. `clearhash-v1` rejected when required circuit is shielded. Artifact `evidence-bundles/zk-circuit-assurance/latest.txt`. |
+| D06–D10 | TODO | Privacy gossip, privacy-scope matrix, frontend verbiage, companion primitives, opaque-intent grep. |
 
-Next: D03 VM fee-router test, D04 VAI risk, D05 pin `shielded-ledger-v1`. Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker still required for `platform-cli` and Fuji L1 (Phase E). Do not fund mainnet yet.
+Next: D06 encrypted gossip + threshold decrypt (shared-key-only = FAIL). Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker still required for `platform-cli` and Fuji L1 (Phase E). Do not fund mainnet yet.
