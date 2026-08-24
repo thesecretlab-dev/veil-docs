@@ -2,6 +2,8 @@
 
 Technical documentation, specifications, runbooks, and architecture guides for the VEIL protocol.
 
+**Launch path (2026-08-24):** [`runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md`](runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md) is the ordered go-live runlist from current (not-live) state through Fuji and mainnet. Feb 2026 `PASS (local)` evidence is stale and does not authorize launch.
+
 ## Structure
 
 ```
@@ -19,8 +21,9 @@ docs/
 │   └── BOND_MARKETS_V2.md                      Bond market V2 design
 │
 ├── runbooks/         Operational procedures
+│   ├── VEIL_MAINNET_LAUNCH_RUNLIST.md         Ordered path to mainnet (start here)
 │   ├── VEIL_MASTER_RUNBOOK.md                  Master operations guide
-│   ├── VEIL_PRODUCTION_LAUNCH_CHECKLIST.md     Production launch checklist
+│   ├── VEIL_PRODUCTION_LAUNCH_CHECKLIST.md     Production launch checklist (G0–G12)
 │   ├── VEIL_PRODUCTION_KEY_CEREMONY_RUNBOOK.md Key ceremony procedure
 │   ├── VEIL_MEMPOOL_PRIVACY_HARDENING_RUNBOOK.md  Mempool privacy hardening
 │   ├── VEIL_EVM_INTENT_RELAY_RUNBOOK.md        EVM intent relay operations
