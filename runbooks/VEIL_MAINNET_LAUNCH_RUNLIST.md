@@ -24,7 +24,7 @@ This runlist is the ordered operator path. Older checklists (`VEIL_PRODUCTION_LA
 | Feb 22 G0–G12 | All marked PASS (local). **Do not reuse.** |
 | Feb 25 companion PoS | Stuck: disconnected bootstrap validator weight 100, connected weight 1, 20% churn cap, ~399 AVAX needed. NodeIDs not on Primary Network now. |
 | Hardened owner `0xB9a05A…96af` | **Lost.** Replacement `0x641597…407B` generated. Owner-gated contracts from old key are non-actionable. |
-| This workstation (3090 PC) | No VEIL clone. GitHub MCP + Avalanche MCP available. |
+| This workstation (3090 PC) | VEIL clones under `C:\Users\Justin\src\veil`. Local Windows node + anvil + order-router PASS (Phase C). GitHub MCP + Avalanche MCP available. |
 | Original operator host | Josh machine: `C:\Users\Josh\hypersdk\examples\veilvm`. |
 
 **Hard rule:** local PASS ≠ Fuji PASS ≠ mainnet PASS. Each network gets a **new** evidence bundle.
