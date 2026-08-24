@@ -1,17 +1,23 @@
 # VEIL Companion EVM Intent Rails
 
-This folder provides EVM-facing intent entrypoints, bridge contracts, and a TypeScript SDK used by VEIL relayers and frontend clients.
+Companion EVM is the **public on-ramp** to VeilVM. It is not a second copy of the protocol.
 
-## Contracts
+v1 layering: [`../architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md).
 
-- `contracts/VeilOrderIntentGateway.sol` — Opaque order intent submission
-- `contracts/VeilLiquidityIntentGateway.sol` — Opaque liquidity intent submission
-- `contracts/VeilBridgeMinter.sol` — **Production bridge minter** (Teleporter-integrated, rate-limited, pausable)
-- `contracts/VeilVAI.sol` — VAI stablecoin token
-- `contracts/VeilTreasury.sol` — Treasury operations
-- `contracts/VeilKeep3r.sol` — Keeper automation
-- `contracts/VeilUniV2Dex.sol` — UniV2 DEX (factory + router)
-- `contracts/Vat.sol`, `Dog.sol`, `Clip.sol`, etc. — MakerDAO DSS ports
+## v1 rails (deploy these)
+
+Sources live in `thesecretlab-dev/veil-contracts`. Compile with `forge build --profile rails`.
+
+- `VeilOrderIntentGateway.sol` — commit-only order intent (`commitment`, `nullifier` in events)
+- `VeilLiquidityIntentGateway.sol` — commit-only liquidity intent
+- `VeilBridgeMinter.sol` — Teleporter minter for WVEIL (placeholders in old address JSON are not production)
+- `WVEIL.sol` — wrap companion native VEIL as ERC-20
+- `ZeroIdVerifier.sol` — ZER0ID Groth16 verifier
+- `VeilFaucet.sol` — testnets only
+
+## Not v1 rails (do not deploy as “the protocol”)
+
+VAI mint/burn, UniV2, COL, fee router, bonds, staking live on **VeilVM** (actions 7–14). Solidity Maker DSS, Olympus, `VeilVAI`, `VeilTreasury`, `VeilUniV2Dex`, Keep3r, meme/404 stay in git as parked ports.
 
 ## SDK
 

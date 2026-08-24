@@ -6,7 +6,7 @@ Canonical SHA: `9ce05eec1a3bc11df1def10d5a134e4c29803ac3`
 Source of IDs in binary: `veilvm/consts/types.go`  
 Runlist item: **A03**
 
-Handshake / ANIMA docs claim **42 actions (IDs 0–41)**. The public VM implements **19 actions (IDs 0–18)**. Until 19–41 exist in this tree and `go test ./...` is green, **public copy must say 19 native actions**, not 42.
+**v1 is officially 19 actions (IDs 0–18).** Handshake / ANIMA “42 actions (0–41)” is reduced, not deferred marketing. IDs 19–41 stay spec-only until a later version lands them in `types.go` and `go test ./...`. Public copy must say **19**, never 22/41/42.
 
 ## Implemented in `types.go` (binary)
 

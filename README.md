@@ -2,13 +2,15 @@
 
 Technical documentation, specifications, runbooks, and architecture guides for the VEIL protocol.
 
-**Launch path (2026-08-24):** [`runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md`](runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md) is the ordered go-live runlist from current (not-live) state through Fuji and mainnet. Feb 2026 `PASS (local)` evidence is stale and does not authorize launch.
+**Stack (v1):** [`architecture/VEIL_STACK.md`](architecture/VEIL_STACK.md) is the layering. VeilVM is the protocol (19 actions, supply 990,999,000). Companion EVM is wrap/bridge/intents only.
+
+**Launch path:** [`runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md`](runbooks/VEIL_MAINNET_LAUNCH_RUNLIST.md). Feb 2026 `PASS (local)` is stale and does not authorize launch.
 
 ## Structure
 
 ```
 docs/
-├── architecture/     System design and architecture overviews
+├── architecture/     System design (`VEIL_STACK.md` is v1 layering)
 ├── specs/            Protocol specifications and technical designs
 │   ├── VEIL_V1_NATIVE_PRIVACY_SPEC.md          Privacy layer specification
 │   ├── VEIL_ZK_CONSENSUS_4_6S_TRIAL_PROFILE.md ZK consensus trial results
@@ -75,7 +77,7 @@ docs/
 | Repo | Layer | Description |
 |------|-------|-------------|
 | [`veilvm`](https://github.com/thesecretlab-dev/veilvm) | Chain | Custom HyperSDK VM |
-| [`veil-contracts`](https://github.com/thesecretlab-dev/veil-contracts) | Contracts | 34 Solidity contracts |
+| [`veil-contracts`](https://github.com/thesecretlab-dev/veil-contracts) | Rails | v1: WVEIL, bridge, intents, ZER0ID verifier. Other Solidity is parked. |
 | [`veil-frontend`](https://github.com/thesecretlab-dev/veil-frontend) | Application | veil.markets frontend |
 | [`zeroid`](https://github.com/thesecretlab-dev/zeroid) | Identity | ZK-SNARK identity |
 | [`anima-runtime`](https://github.com/thesecretlab-dev/anima-runtime) | Agents | Sovereign agent framework |

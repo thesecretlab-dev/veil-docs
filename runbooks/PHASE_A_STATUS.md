@@ -25,4 +25,6 @@ Runlist: `VEIL_MAINNET_LAUNCH_RUNLIST.md`.
 | B04 | TODO | Fund Fuji P/C for `pchain-operator` / `cchain-gas`. |
 | B05 | **PASS** | Keybox outside git + ACL; `secrets/README.md` points at it. |
 
-Next: B04 Fuji faucet (needs AVAX test funds) **or** WSL/Docker for Phase C. Do not fund mainnet yet.
+**Stack tighten (2026-08-24):** [`architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md). v1 = 19 actions. Companion = rails only. Parked Solidity is not the protocol.
+
+Next: B04 Fuji faucet **or** WSL/Docker for Phase C. Do not fund mainnet yet.
