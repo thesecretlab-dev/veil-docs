@@ -53,6 +53,12 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 | D03 | **PASS** | RouteFees 70/20/10 (`7000/2000/1000`) + remainder-to-ops. `PutFeeRouterConfig` rejects non-10000 bips. Genesis JSON freeze test. |
 | D04 | **PASS** | VAI debt ceiling, epoch mint throttle + reset, backing floor, unauthorized mint. wsVEIL LTV must be 0 (`PutRiskConfig` / `SetRiskParams`). |
 | D05 | **PASS** | `shielded-ledger-v1` Groth16 VK sha256 `40d25f181550c879f93d22dfa50305700bdb0e731ced46d1b789248e552398ba`. Sample proof verifies against pinned VK. `clearhash-v1` rejected when required circuit is shielded. Artifact `evidence-bundles/zk-circuit-assurance/latest.txt`. |
-| D06–D10 | TODO | Privacy gossip, privacy-scope matrix, frontend verbiage, companion primitives, opaque-intent grep. |
+| D06 | **FAIL** | Encrypted gossip + threshold decrypt are **not in the v1 binary**. Shared-key-only would also FAIL. Do not claim mempool privacy. |
+| D07 | **PASS** | `veil-frontend/docs/privacy-scope-matrix.md` — VM commit opaque; companion events commitment/nullifier; Polymarket public catalog. |
+| D08 | **PASS** | Native vs Polymarket copy. No “live private markets.” Native cards = Local. CTA/veil/how-it-works aligned. |
+| D09 | TODO | Teleporter/bridge not on local anvil (Phase F). |
+| D10 | **PASS** | Gateway events are commitment/nullifier/envelopeHash only. `evidence-bundles/opaque-intents-2026-08-24.md`. |
 
-Next: D06 encrypted gossip + threshold decrypt (shared-key-only = FAIL). Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker still required for `platform-cli` and Fuji L1 (Phase E). Do not fund mainnet yet.
+**D exit:** D01–D05, D07, D08, D10 PASS. D06 FAIL (honest). D09 tracked to Phase F.
+
+Next: keep local UX solid. Operator-only: B04 Fuji faucet (CAPTCHA). WSL/Docker for `platform-cli` / Fuji L1 (Phase E). Do not fund mainnet.

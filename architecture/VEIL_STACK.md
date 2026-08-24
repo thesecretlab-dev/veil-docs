@@ -51,7 +51,7 @@ VeilVM is the protocol. Companion EVM is an on-ramp. Solidity does not re-implem
 | VeilVM commit / reveal / proof / clear | Private when proof-gated and verifier is strict |
 | Companion intent **events** | Commitment + nullifier only (current gateways) |
 | Companion ERC-20 / DEX / VAI (out of v1 rails) | Public if deployed; do not ship in v1 |
-| Frontend / Polymarket | Public, external |
+| Frontend / Polymarket | Public, external catalog. Not VEIL settlement. |
 
 Do not claim full-stack anonymity.
 
