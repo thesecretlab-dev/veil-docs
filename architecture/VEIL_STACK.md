@@ -40,6 +40,7 @@ VeilVM is the protocol. Companion EVM is an on-ramp. Solidity does not re-implem
 - Native actions: **19** (TypeIDs **0–18**). See `specs/VEIL_ACTION_REGISTRY.md`.
 - IDs 19–41 (bonds, YRF/RBS, staking, oracle, bloodsworn, pause, reveal committee): **spec-only, not v1**. Do not advertise. Do not send on-chain.
 - `TOTAL_SUPPLY = 990,999,000`. See `specs/VEIL_SUPPLY_FREEZE_2026-08-24.md`.
+- **No Keep3r allocation.** Circulating is the 5% float. Cadence is relayer + operator.
 - Lost owner `0xB9a05AFC8eff7eE6a84889Bb9C88A89eAA2f96af`: do-not-deploy-under.
 - Companion `eth_chainId` must **not** be 22207. That number is VeilVM’s HyperSDK app id.
 
@@ -63,7 +64,7 @@ Do not claim full-stack anonymity.
 - `contracts/bridge/VeilLiquidityIntentGateway.sol`
 - `contracts/identity/ZeroIdVerifier.sol`
 
-Everything else in `veil-contracts` is **parked**: Maker port, Olympus, UniV2, treasury, Keep3r, experimental meme/404. Keep in git. Do not deploy for v1. Do not describe as “the VEIL protocol.”
+Everything else in `veil-contracts` is **parked**: Maker port, Olympus, UniV2, treasury, Keep3r, experimental meme/404. Keep in git. Do not deploy for v1. Do not describe as “the VEIL protocol.” `VeilKeep3r` is not a genesis bucket and is not on the launch path.
 
 Native AMM, VAI mint/burn, COL, fee router live **only** as VeilVM actions 7–14.
 

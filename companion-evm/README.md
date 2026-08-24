@@ -17,7 +17,7 @@ Sources live in `thesecretlab-dev/veil-contracts`. Compile with `forge build --p
 
 ## Not v1 rails (do not deploy as “the protocol”)
 
-VAI mint/burn, UniV2, COL, fee router, bonds, staking live on **VeilVM** (actions 7–14). Solidity Maker DSS, Olympus, `VeilVAI`, `VeilTreasury`, `VeilUniV2Dex`, Keep3r, meme/404 stay in git as parked ports.
+VAI mint/burn, UniV2, COL, fee router, bonds, staking live on **VeilVM** (actions 7–14). Solidity Maker DSS, Olympus, `VeilVAI`, `VeilTreasury`, `VeilUniV2Dex`, Keep3r, meme/404 stay in git as parked ports. Keep3r has **no genesis allocation** and is not on the launch path.
 
 ## SDK
 

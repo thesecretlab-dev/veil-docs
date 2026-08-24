@@ -48,7 +48,7 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 
 | ID | Status | Notes |
 |---|---|---|
-| D01 | **PASS** (bucket sum) | `scripts/genesis-launchpad.mjs` — circulating 49,549,950 + COL locked 900,000,000 + COL live 41,449,050 = 990,999,000. Keep3r 2% (19,819,980) is a reservation *from circulating*, not extra mint. Artifact `evidence-bundles/launchpad-freeze/launchpad-freeze-20260824184356.json`. |
+| D01 | **PASS** (bucket sum) | circulating 49,549,950 + COL locked 900,000,000 + COL live 41,449,050 = 990,999,000. **Keep3r dropped** (0 bips, not a bucket). Artifact `evidence-bundles/launchpad-freeze/latest.txt`. |
 | D02 | **PASS** | `go test ./actions -run ReleaseCOL` — unauthorized / zero / drain-all / epoch-cap / too-early all fail closed. Locked unchanged after drain attempt. |
 | D03 | PARTIAL | Genesis fee router 70/20/10 encoded (`7000/2000/1000`). VM accounting test not added yet. |
 | D04–D10 | TODO | VAI/ZK/privacy/frontend/companion primitives. |

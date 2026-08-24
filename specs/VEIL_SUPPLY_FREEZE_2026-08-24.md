@@ -18,6 +18,7 @@ Allocation in `veilvm/genesis.json` (sums to total):
 | Circulating / customAllocation (5% float) | 49,549,950 |
 | COL vault locked | 900,000,000 |
 | COL vault live | 41,449,050 |
+| Keep3r | **0** (dropped 2026-08-24; not a bucket) |
 | **Total** | **990,999,000** |
 
 ## Conflict (rejected until a signed revision)

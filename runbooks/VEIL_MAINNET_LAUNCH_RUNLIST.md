@@ -130,7 +130,7 @@ Target topology (from dual-chain readiness package):
 
 | ID | Action | Pass criteria | Evidence |
 |---|---|---|---|
-| D01 | Finalize genesis allocation so buckets sum to `TOTAL_SUPPLY`: COL locked, COL live, staking bond, ops, Keep3r **2.0%**, ecosystem, circulating. | `scripts/genesis-launchpad.mjs` freeze artifacts. | `launchpad-freeze-<ts>.json` |
+| D01 | Finalize genesis allocation so buckets sum to `TOTAL_SUPPLY`: circulating, COL locked, COL live. **No Keep3r bucket.** | `scripts/genesis-launchpad.mjs` freeze artifacts. | `launchpad-freeze-<ts>.json` |
 | D02 | Encode COL no-drain + `ReleaseCOLTranche` epoch cap in VM tests. | Tests fail if drain attempted. | `go test` COL suite |
 | D03 | Fee router 70/20/10 at genesis. | On-chain/VM accounting matches. | tokenomics check |
 | D04 | VAI: debt ceiling, epoch mint throttle, exogenous backing floor. vVEIL LTV=0. | Economic coherence audit PASS. | `npm run audit:economics` |
@@ -178,8 +178,8 @@ Use MCP `build_plan` `operation=create-l1` `network=fuji` `vm=custom` `name=VEIL
 | F04 | ICTT / Teleporter: home=VeilVM or companion, remote=C-Chain Fuji. MCP `build_plan operation=ictt` for command template. | Bidirectional message test with finalized tx hashes. | `EVID/fuji-bridge/roundtrip.md` |
 | F05 | Opaque order relay: IntentSubmitted → `/evm/intents/execute` → `markIntentExecuted`. | End-to-end PASS. | relay logs + VeilTxHash |
 | F06 | Liquidity relay: create_pool / add / swap_exact_in for VEIL/VAI. | PASS. | relay logs |
-| F07 | Keep3r jobs: treasury cadence, LP rebalance, bridge health — **Fuji**. | First successful work cycle on-chain. | Keep3r txs |
-| F08 | Rotate companion owners off temporary EOA to Fuji multisig (can be 2-of-3 test). | Owner(VAI, Treasury, Keep3r, BridgeMinter) = multisig. | `admin-rotation/*` |
+| F07 | **Dropped.** Keep3r is not v1. Cadence is relayer + operator. Do not deploy `VeilKeep3r`. | N/A | this row |
+| F08 | Rotate companion owners off temporary EOA to Fuji multisig (can be 2-of-3 test). | Owner(WVEIL, BridgeMinter, intent gateways) = multisig. | `admin-rotation/*` |
 
 **F exit:** F04, F05, F08 PASS.
 
@@ -275,7 +275,7 @@ Map to classic gates (must all be **Fuji PASS**, not local):
 3. Bridge, RPC, validator connected-stake snapshot.
 4. Frontend copy: mainnet, no overclaim, privacy matrix.
 5. Incident channel + rollback runbook from packet staged.
-6. Keep3r credits ≥7 days. Relayer gas ≥7 days.
+6. Relayer gas ≥7 days. No Keep3r credit check.
 
 ### J2 Launch-day sequence
 
@@ -284,7 +284,7 @@ Map to classic gates (must all be **Fuji PASS**, not local):
 | J2.1 | RPC + explorer + transparency | Read-only |
 | J2.2 | WVEIL wrap/unwrap | Caps on |
 | J2.3 | VAI mint/burn under ceiling | Watch backing floor |
-| J2.4 | UniV2 VEIL/VAI | Keep3r rebalance on |
+| J2.4 | Native VEIL/VAI AMM on VeilVM | Relayer; no Keep3r |
 | J2.5 | Opaque order intents | Native markets |
 | J2.6 | Bond / YRF / RBS | Only if D-phase actions are in the canonical VM |
 | J2.7 | ANIMA onboarding | Fail-closed; no simulated validators |
@@ -296,10 +296,10 @@ If any critical regression: pause intake (not drain), execute rehearsal rollback
 
 From `VEIL_FOUNDATION_FLYWHEEL_LAUNCH_PLAN.md`:
 
-- T+24h: seed wVEIL/VAI depth; first Keep3r cycle; live dashboard.
+- T+24h: seed native VEIL/VAI depth; relayer healthy; live dashboard.
 - D2–D7: extra pairs, fee recycle, MM onboarding after 48h depth hold.
 - D8–D30: cut pure emissions; volume/spread incentives; weekly treasury PnL.
-- KPIs: 100 VAI ≤1% slippage; keeper >99%; bridge SLO; net fee capture by week 4.
+- KPIs: 100 VAI ≤1% slippage; relayer >99%; bridge SLO; net fee capture by week 4.
 
 **J exit:** public GO recorded with packet hash + subnet ID + chain ID.
 
