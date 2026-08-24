@@ -280,10 +280,10 @@ To preserve low float and runway:
 
 ### Approved Numeric Baseline (Current)
 
-Use these exact constants unless governance formally revises them before genesis:
+Use these exact constants unless governance formally revises them before genesis (frozen 2026-08-24 — `VEIL_SUPPLY_FREEZE_2026-08-24.md`):
 
-- `TOTAL_SUPPLY = 1,191,449,050 VEIL`
-- `KEEP3R_PROGRAM_POOL = 2.0%` (`23,828,981 VEIL`)
+- `TOTAL_SUPPLY = 990,999,000 VEIL`
+- `KEEP3R_PROGRAM_POOL = 2.0%` (`19,819,980 VEIL`)
 - financing raise target: `$2,000,000`
 - sold in seed+presale: `5.0%` (`49,549,950 VEIL`)
 - blended financing price: `$0.04036331`

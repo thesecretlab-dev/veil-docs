@@ -60,13 +60,13 @@ Token taxonomy (v1):
 
 ## 3.1 Approved Launch Financing Baseline
 
-Current approved constants:
+Current approved constants (frozen 2026-08-24 — see `VEIL_SUPPLY_FREEZE_2026-08-24.md`):
 
-- `TOTAL_SUPPLY = 1,191,449,050 VEIL`
+- `TOTAL_SUPPLY = 990,999,000 VEIL`
 - seed + presale raise target: `$2,000,000`
 - total sold at launch financing: `5.0%` (`49,549,950 VEIL`)
 - blended sale price (5% sold): `$0.04036331` per VEIL
-- `KEEP3R_PROGRAM_POOL = 2.0%` (`23,828,981 VEIL`) reserved at genesis for foundation-bootstrapped chain-native keeper jobs and rewards
+- `KEEP3R_PROGRAM_POOL = 2.0%` (`19,819,980 VEIL`) reserved at genesis for foundation-bootstrapped chain-native keeper jobs and rewards
 
 Seed/presale split (20% seed discount to presale):
 
