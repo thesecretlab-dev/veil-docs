@@ -1,8 +1,10 @@
 # VEIL Mempool Privacy Hardening Runbook
 
 Status: Active  
-Date: 2026-02-21  
+Date: 2026-08-27  
 Owner: VM Lead + Security Lead
+
+Canonical runtime: `specs/VEIL_LOCAL_RUNTIME_STATUS_2026-08-27.md`. The Feb file names in §2.5–2.6 (`transaction_marshaller_threshold.go`, `threshold_tx_gossip_handler.go`) were never in this tree. Live code is listed below.
 
 ## 1. Purpose
 
@@ -46,36 +48,19 @@ Document the mempool privacy hardening step that is now implemented, what it gua
 - Test file:
   - `chain/transaction_marshaller_encrypted_test.go`
 
-### 2.5 Threshold-gated decryption release
+### 2.5 Threshold-keyed gossip (live in hypersdk)
 
-- Added threshold envelope framing for tx gossip and a quorum gate before release into mempool submit path.
-- Encrypted gossip payloads are held until at least `txGossipThresholdMinShares` unique validator attestations are observed.
-- Runtime fail-close rules:
-  - threshold mode requires encrypted gossip mode
-  - minimum shares must be `>=2`
+- Envelope magic `VTG2`. Data key is Shamir-split; shares wrapped with X25519 to committee pubs.
+- Ciphertext is held until `t` shares combine. Share announcements use `VTGS` (also committee-wrapped).
+- `txGossipEncryptionRequired=true` **requires** threshold `t>=2`. Outer VTG1 is rejected.
+- Local daemon: 2-of-3 committee, node holds `node0.priv` only.
 - Implementation:
-  - `chain/transaction_marshaller_threshold.go`
-  - `vm/threshold_tx_gossip_handler.go`
-  - `vm/config.go`
-  - `vm/vm.go`
-- Test files:
-  - `chain/transaction_marshaller_threshold_test.go`
-  - `vm/threshold_tx_gossip_handler_test.go`
-
-### 2.6 Cryptographic threshold keying mode (implemented)
-
-- Added optional cryptographic threshold keying path:
-  - per-envelope data key is Shamir-split
-  - each share is X25519-encrypted to a committee validator key
-  - threshold shares are combined before decrypting envelope payload into mempool submit path
-- Runtime activation requires:
-  - `txGossipThresholdNodePrivateKeyHex`
-  - `txGossipThresholdCommitteePublicKeys` (or env JSON equivalent)
-- Implementation:
-  - `vm/threshold_tx_gossip_crypto.go`
-  - `vm/threshold_tx_gossip_crypto_handler.go`
-- Test file:
-  - `vm/threshold_tx_gossip_crypto_test.go`
+  - `hypersdk/chain/shamir.go`
+  - `hypersdk/chain/tx_gossip_threshold.go`
+  - `hypersdk/chain/transaction_marshaller_encrypted.go`
+  - `hypersdk/internal/gossiper/{handler,manual,target}.go`
+  - `hypersdk/vm/config.go`, `hypersdk/vm/vm.go`
+- Tests: `go test ./chain -run 'Gossip|Shamir|Threshold'`
 
 ## 3. What This Guarantees Now
 
@@ -83,7 +68,7 @@ Document the mempool privacy hardening step that is now implemented, what it gua
 - Nodes cannot silently run plaintext gossip when encryption is marked required.
 - Local key is managed as a secret file, not committed config.
 - In threshold mode, encrypted gossip is not released to mempool submit path until validator-share quorum is reached.
-- In cryptographic threshold mode, no single validator local key share can directly decrypt envelope data key before threshold combine.
+- In VTG2 threshold mode, no single committee private key can open the gossip envelope.
 
 ## 4. What This Does Not Yet Guarantee
 

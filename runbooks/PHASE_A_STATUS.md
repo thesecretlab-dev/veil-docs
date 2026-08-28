@@ -20,7 +20,7 @@ Runlist: `VEIL_MAINNET_LAUNCH_RUNLIST.md`.
 | ID | Status | Notes |
 |---|---|---|
 | B01 | **PARTIAL** | Go 1.26.7, gcc 16.1 MinGW, Node v24.19.0, Foundry 1.7.1. Docker Desktop / WSL not installed. |
-| B02 | **FAIL** | `platform-cli` does not compile on Windows (`storage.AvailableBytes`). `avalanche-cli` source present, not built. |
+| B02 | **PASS** (local patch) | Windows build failed because avalanchego v1.14.3 has no `storage_windows.go`. Added `AvailableBytes` via `replace => ../avalanchego-win-storage`. Binary `C:\Users\Justin\tools\platform-cli.exe`. Not an upstream Ava Labs patch. |
 | B03 | **PASS** | New operator keys generated 2026-08-24. Public map: `veilvm/evidence-bundles/key-map/operator-2026-08-24.json`. Private hex in `C:\Users\Justin\tools\veil-keybox\private` (not git). |
 | B04 | **PARTIAL** | Fuji C-gas `0xb954…0315` ~0.25 AVAX. P-operator `P-fuji1pmaraw…399` ~0.75 AVAX (C→P import `YBDRA7AB…`). Not a Phase E gate. |
 | B05 | **PASS** | Keybox outside git + ACL; `secrets/README.md` points at it. |
@@ -42,7 +42,7 @@ Skipped Docker. Built AvalancheGo + VeilVM plugin natively.
 
 Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 
-**C exit (local):** C01–C06 PASS on Windows anvil rails. Fuji L1 still closed until `platform-cli` (X1) and a real companion L1 + ICTT (X3).
+**C exit (local):** C01–C06 PASS on Windows anvil rails. X1 `platform-cli` is PASS (local Windows stub). Fuji L1 still closed until you say create it, and a real companion L1 + ICTT (X3) is still required after that.
 
 ## Phase D (2026-08-24)
 
@@ -52,13 +52,13 @@ Evidence: `veilvm/evidence-bundles/local-revive-2026-08-24/smoke.md`.
 | D02 | **PASS** | `go test ./actions -run ReleaseCOL` — unauthorized / zero / drain-all / epoch-cap / too-early all fail closed. Locked unchanged after drain attempt. |
 | D03 | **PASS** | RouteFees 70/20/10 (`7000/2000/1000`) + remainder-to-ops. `PutFeeRouterConfig` rejects non-10000 bips. Genesis JSON freeze test. |
 | D04 | **PASS** | VAI debt ceiling, epoch mint throttle + reset, backing floor, unauthorized mint. wsVEIL LTV must be 0 (`PutRiskConfig` / `SetRiskParams`). |
-| D05 | **PASS** | `shielded-ledger-v1` Groth16 VK sha256 `40d25f181550c879f93d22dfa50305700bdb0e731ced46d1b789248e552398ba`. Sample proof verifies against pinned VK. `clearhash-v1` rejected when required circuit is shielded. Artifact `evidence-bundles/zk-circuit-assurance/latest.txt`. |
-| D06 | **FAIL** | Encrypted gossip + threshold decrypt are **not in the v1 binary**. Shared-key-only would also FAIL. Do not claim mempool privacy. |
+| D05 | **PASS** | `shielded-ledger-v1` Groth16 VK sha256 `7618a647534c5cc47586f8ad778264a8dfc1a5da71e557db13607bfeae07a5a9` (expanded preimage: fills + commitment/nullifier/state-root slots). Digest-binding, not in-circuit matching. |
+| D06 | **PASS (local)** | VTG2 2-of-3 in the binary. `t>=2` required when encryption is required. Outer VTG1 rejected. One key cannot decrypt. RPC `SubmitTx` still plaintext on the solo node. Shared AES is not a private mempool. |
 | D07 | **PASS** | `veil-frontend/docs/privacy-scope-matrix.md` — VM commit opaque; companion events commitment/nullifier; Polymarket public catalog. |
 | D08 | **PASS** | Native vs Polymarket copy. No “live private markets.” Native cards = Local. CTA/veil/how-it-works aligned. |
 | D09 | **PASS** (local-mock) | Registry filled: WVEIL, gateways, faucet, `VeilBridgeMinter`, `teleporterKind=local-mock`. `check:companion-primitives` PASS on 31337. **Not** Fuji ICTT. Phase F still required for real Teleporter. |
 | D10 | **PASS** | Gateway events are commitment/nullifier/envelopeHash only. `evidence-bundles/opaque-intents-2026-08-24.md`. |
 
-**D exit (local):** D01–D05, D07–D10 PASS. D06 FAIL (no encrypted gossip — do not claim mempool privacy). D09 is local-mock only.
+**D exit (local):** D01–D10 PASS with the caveats in D06 (RPC ingest) and D09 (local-mock Teleporter).
 
-**What we work on now:** [`NOW_TRIAGE.md`](NOW_TRIAGE.md) N3/N4. **Not** Fuji L1 until X1 `platform-cli`.
+**What we work on now:** Keep local honest. **Not** Fuji L1 until you say create it. X3 (real Teleporter companion) still required after that. Production gossip is 13-of-20, not this 2-of-3 box.

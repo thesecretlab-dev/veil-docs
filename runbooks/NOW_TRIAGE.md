@@ -16,7 +16,7 @@ Authority: [`architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md). This f
 4. **Placeholders fail.** Empty Teleporter, chainId 22207 on companion, abandoned Feb packet, lost owner `0xB9a05AFC…`.
 5. **Local ≠ Fuji ≠ mainnet.** A local PASS does not move the runlist forward.
 6. **Do not skip the EVM seam** to “go live.” Native UI talking to the router signer is not dual-chain.
-7. **Do not claim live private markets** or mempool privacy. D06 gossip is not in the binary.
+7. **Do not claim live private markets on Fuji/mainnet.** Local gossip is VTG2 2-of-3 (one key cannot decrypt). RPC ingest on a solo node is still plaintext. Shared AES (VTG1) is not a private mempool.
 8. **v1 is 19 actions.** 19–41 stay spec-only. Keep3r is not a bucket and not on the path.
 
 ---
@@ -31,9 +31,12 @@ Authority: [`architecture/VEIL_STACK.md`](../architecture/VEIL_STACK.md). This f
 | Persistent companion rails (WVEIL, gateways, faucet) | **Yes** on anvil 31337 (`deploy-rails.mjs`) |
 | Relayer as a standing service against those rails | **Yes** for e2e; `--watch` on stack start |
 | Teleporter / `VeilBridgeMinter` wired | **Local mock only.** Not Fuji ICTT |
-| Reveal / proof / clear in the product loop | **No** |
+| Reveal / proof / clear in the product loop | **Yes (local)** — `scripts/privacy-loop.mjs`. Not Fuji. |
+| VTG2 threshold gossip (t=2 n=3) | **Yes (local).** `txGossipEncryptionRequired` requires threshold. |
+| Native VAI / AMM / COL / fee router | **Yes (local)** — `scripts/ecosystem-loop.mjs`. |
+| Opaque EVM intent rails | **Yes (local anvil)** — `scripts/local-stack-e2e.mjs`. |
 | Fuji L1 | **No** |
-| `platform-cli` on this Windows box | **No** |
+| `platform-cli` on this Windows box | **Yes** (`C:\Users\Justin\tools\platform-cli.exe`, local storage stub) |
 | Fuji operator gas | **Partial** — P ~0.75 AVAX, C ~0.25 AVAX. Not a launch gate. |
 
 ---
@@ -47,10 +50,10 @@ Gate: **local dual-chain is a stack**, or we explicitly waive EVM and ship VeilV
 | N1 | Deploy v1 rails on local anvil and **persist** them. | **PASS** — `deploy-rails.mjs` + `companion-evm.addresses.json`. Teleporter = `LocalTeleporter` mock. |
 | N2 | Standing relayer against **N1 addresses**. | **PASS** — e2e EXECUTED on persisted gateways. `relay-opaque-intents.mjs --watch`. |
 | N3 | Local stack start does N1+N2. | **PASS** — `run-local-stack.ps1` deploys rails and starts relayer watch. |
-| N4 | Reveal / proof / clear operator path. | TODO |
+| N4 | Reveal / proof / clear operator path. | **PASS (local)** — opaque `VEILENC1` commit, `RevealBatch` share required, groth16 `shielded-ledger-v1`, `ClearBatch`. Evidence `veilvm/evidence-bundles/local-revive-2026-08-24/privacy-loop.md`. D06 gossip still FAIL. |
 | N5 | Status honesty. | **PASS** — C04/D09 are local-anvil, not Fuji. |
 
-**NOW exit:** N1–N3, N5 PASS. N4 (reveal/proof/clear) still open. Fuji still closed.
+**NOW exit:** N1–N5 PASS locally. Fuji still closed. D06 encrypted gossip is still FAIL — do not claim mempool privacy.
 
 ---
 
@@ -58,7 +61,7 @@ Gate: **local dual-chain is a stack**, or we explicitly waive EVM and ship VeilV
 
 | ID | Need | Why it waits |
 |---|---|---|
-| X1 | WSL or a Linux host so `platform-cli` runs | Cannot sign subnet/L1 txs from this Windows `platform-cli` today |
+| X1 | `platform-cli` on this Windows box | **PASS** (local avalanchego `AvailableBytes` stub). Fuji L1 still needs a real companion later (X3). |
 | X2 | Fuji VeilVM L1 (runlist Phase E) | Needs X1 + NOW. P-Chain gas is already there |
 | X3 | Fuji companion EVM + real Teleporter + `VeilBridgeMinter` (D09 / Phase F) | Needs X2. Anvil cannot satisfy Teleporter |
 | X4 | Point frontend / ANIMA at Fuji RPC, not 127.0.0.1 | Needs X2 |
