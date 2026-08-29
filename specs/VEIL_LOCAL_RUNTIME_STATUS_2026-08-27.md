@@ -27,7 +27,9 @@ Native actions 7–14: fee router 70/20/10, COL tranche release, VAI mint/burn w
 
 ## Companion rails
 
-Order + liquidity intent gateways, WVEIL, faucet. Relayer: `submitIntent` → mailbox envelope → VeilVM execute → `markIntentExecuted`. Local Teleporter is a mock.
+Order + liquidity intent gateways, WVEIL, faucet on **anvil 31337** (`http://127.0.0.1:8545`). Relayer: `submitIntent` → mailbox envelope → VeilVM execute → `markIntentExecuted`. Local Teleporter is a mock.
+
+EVM wallets (gov/wagmi) attach to 31337, not HyperSDK app-id 22207 and not `:9650` / `2L5J…`. `/evm/intents/execute` and `/evm/liquidity/execute` fail closed without `intentId`, `nullifier`, and companion `sourceTxHash`. Frontend `/api/network-status` and `/api/interop` probe this matrix; `scripts/interop-matrix.mjs` is the live check.
 
 ## Proof fixtures
 
